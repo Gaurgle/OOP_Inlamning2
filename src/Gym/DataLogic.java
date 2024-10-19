@@ -4,57 +4,77 @@ import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DataLogic {
 
-    final private String localDateTimeToday = java.time.LocalDate.now().toString();
-    final private String localDateTimeMinusOneYear = java.time.LocalDate.now().minusYears(1).toString();
-    private HashMap<Long, Person> gymMembersDataList;
-    private final String gymMembersFilePath = "src/Gym/GymMembersData.txt";
-
-    public DataLogic(DataInput dataInput) {
-        this.gymMembersDataList = dataInput.gymMembersDataList;
+    protected DataInput gymMembersDataList;
+    public DataLogic(DataInput gymMembersDataList) {
+        this.gymMembersDataList = gymMembersDataList;
     }
 
-
     public void checkMembership() throws IOException {
-        String checkName = JOptionPane.showInputDialog("Ange namn: ");
-        checkName = checkName.trim();
+        String checkInput = JOptionPane.showInputDialog("Enter name or social security ID nr: ");
+        checkInput = checkInput.trim();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         Person foundPerson = null;
 
-        for (Person person : gymMembersDataList.values()) {
-            if (    person.getFullName().equalsIgnoreCase(checkName) ||
-                    person.getFirstName().equalsIgnoreCase(checkName) ||
-                    person.getSurnName().equalsIgnoreCase(checkName)) {
+        for (Person person : gymMembersDataList.gymMembersDataList.values()) {
+            String[] nameParts = person.getFullName().split(" ", 2);
+            String firstName = nameParts[0];
+            String surName = nameParts.length > 1 ? nameParts[1] : "";
+
+            if (    person.getFullName().equalsIgnoreCase(checkInput)
+                    || firstName.equalsIgnoreCase(checkInput)
+                    || surName.equalsIgnoreCase(checkInput)){
+
                 foundPerson = person;
                 break;
             }
-        }
 
-        if (foundPerson != null) {
-            String memberShipStatus = switch (foundPerson.getLastPaymentDate()) {
-                case String date when date.equals(localDateTimeToday) -> {
-                    writeToGymMembers(foundPerson);
-                    yield "Medlemskapet är aktivt.";
+            try {
+                Long checkInputLong = Long.parseLong(checkInput);
+                if (person.getpNr().equals(checkInputLong)) {
+                    foundPerson = person;
+                    break;
                 }
-                case String date when date.equals(localDateTimeMinusOneYear) -> "Medlemskapet har gått ut.";
-                default -> "Personen har aldrig varit medlem";
+            } catch (NumberFormatException _) {
 
-                //TODO fixa sen. ska in i listan.
-            };
-            System.out.println(foundPerson.getFullName() + ": " + memberShipStatus);
-            } else {
-                System.out.println("Personen finns inte i registret.");
             }
         }
 
-        public void writeToGymMembers(Person person) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(gymMembersFilePath, true))) {;
-            writer.write(person.getFullName() + "Har aktivt medlemskap");
+        if (foundPerson == null) {
+            JOptionPane.showMessageDialog(null,"Error: " + checkInput + " is not a valid name or social security ID nr.");
+            return;
+        }
+
+        LocalDate lastPaymentDate = LocalDate.parse(foundPerson.getLastPaymentDate(), formatter);
+        LocalDate today = LocalDate.now();
+        LocalDate oneYearAgo = today.minusYears(1);
+
+        if (!lastPaymentDate.isBefore(oneYearAgo) && !lastPaymentDate.isAfter(today)) {
+            writeToGymMembers(foundPerson);
+            foundPerson.setMembership("Active");
+            System.out.println(foundPerson.toString()); //behövs
+        } else if (lastPaymentDate.isBefore(oneYearAgo)) {
+            writeToGymMembers(foundPerson);
+            foundPerson.setMembership("Inactive");
+            System.out.println(foundPerson.toString());
+        } else {
+            System.out.println("Error: " + foundPerson.getFullName() + "'s membership is invalid.");
+        }
+    }
+
+
+        // hjälpmetod för att skriva till filen
+        public void writeToGymMembers(Person person) {
+            String gymMembersFilePath = "src/Gym/GymMembersData.txt";
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(gymMembersFilePath, true))) {
+            writer.write(person.getFullName());
             writer.newLine();
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

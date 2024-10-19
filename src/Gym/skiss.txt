@@ -6,15 +6,15 @@
 // x(tilldela ID?) nej, personnumret är ID.
 
 // xjämför datum med dagens datum
-// om datum är mindre än ett år sedan, skriv ut att kunden är en nuvarande medlem
-// om datum är mer än ett år sedan, skriv ut att kunden är en före detta kund
-// om personen inte finns i filen, skriv ut att personen är obehörig
-// skriv till fil (nån toString?)
+// xom datum är mindre än ett år sedan, skriv ut att kunden är en nuvarande medlem
+// xom datum är mer än ett år sedan, skriv ut att kunden är en före detta kund
+// xom personen inte finns i filen, skriv ut att personen är obehörig
+// xskriv till fil (nån toString?)
 
 // allt testdrivet
 
 
 
-// gör metod som om man enbart söker på ett förnamn, finns det i listan ska man få som alternativ de fullständiga namn som matchar
+// /gör metod som om man enbart söker på ett förnamn, finns det i listan ska man få som alternativ de fullständiga namn som matchar
 
 

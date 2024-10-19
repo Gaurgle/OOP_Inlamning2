@@ -17,7 +17,7 @@ public class DataInputTest {
     private final String testFilePath = "src/Gym/DataTest.txt";
 
     private HashMap<Long, Person> testMembers = new HashMap<>();
-    private Person testMember = new Person(9003135555L, "Andreas Roos", "2021-12-12", lastPaymentDate);
+    private Person testMember = new Person(9003135555L, "Andreas Roos", "2021-12-12", "");
 
     @Test
     public void fileExist() {

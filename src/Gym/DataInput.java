@@ -28,18 +28,17 @@ public class DataInput {
                     String[] parts = pNrName.split(",\\s*");
                     Long pNr = Long.parseLong(parts[0]);
                     String fullName = parts[1];
-                    String[] firstNameSurName = fullName.split(" ",2);
-                    String firstName = firstNameSurName[0];
-                    String surName = firstNameSurName.length > 1 ? firstNameSurName[1] : "";
-
 
                     // lägger in nytt personobjekt i persons-listan
-                    gymMembersDataList.put(pNr, new Person(pNr, fullName, surName, lastPaymentDate));
+                    gymMembersDataList.put(pNr, new Person(pNr, fullName, lastPaymentDate, ""));
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
+//        for (Person person : gymMembersDataList.values()) {
+//            System.out.println(person.toString());
+//        }
     }
 }

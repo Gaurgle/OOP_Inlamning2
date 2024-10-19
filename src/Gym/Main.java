@@ -12,7 +12,7 @@ public class Main {
             dataLogic.checkMembership();
 
         } catch (FileNotFoundException e) {
-            System.out.println("filen hitta ej" + e.getMessage());
+            System.out.println("filen hittades ej" + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
