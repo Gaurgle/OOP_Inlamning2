@@ -1,0 +1,14 @@
+Name: Idylle, Ida.        P nr: 8906138493     Last payment: 2018-03-07 Membership: Inactive
+Name: Coriola, Chamade.   P nr: 8512021234     Last payment: 2018-03-12 Membership: Inactive
+Name: Djedi, Diamanda.    P nr: 7608021234     Last payment: 2024-01-30 Membership: Active
+Name: Belle, Bear.        P nr: 8204021234     Last payment: 2019-12-02 Membership: Inactive
+Name: Karlsson, Kadine.   P nr: 4604151234     Last payment: 2019-01-09 Membership: Inactive
+Name: Aromes, Alhambra.   P nr: 7703021234     Last payment: 2024-07-01 Membership: Active
+Name: Ganache, Greger.    P nr: 7512166544     Last payment: 2024-03-23 Membership: Active
+Name: Lingren, Liu.       P nr: 9110261234     Last payment: 2022-02-15 Membership: Inactive
+Name: Ekorrsson, Elmer.   P nr: 7605021234     Last payment: 2022-11-07 Membership: Inactive
+Name: Ninsson, Nahema.    P nr: 7805211234     Last payment: 2024-08-04 Membership: Active
+Name: Flacon, Fritjoff.   P nr: 7911061234     Last payment: 2023-12-16 Membership: Active
+Name: Heur, Hilmer.       P nr: 5711121234     Last payment: 2019-08-18 Membership: Inactive
+Name: Mayotte, Mitsuko.   P nr: 7907281234     Last payment: 2019-12-22 Membership: Inactive
+Name: Juul, Jicky.        P nr: 9902149834     Last payment: 2023-09-27 Membership: Inactive
