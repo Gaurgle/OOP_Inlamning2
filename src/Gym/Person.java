@@ -1,5 +1,8 @@
 package Gym;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Person {
 
     protected Long pNr;
@@ -20,23 +23,26 @@ public class Person {
     public String getFullName() {
         return fullName;
     }
-
     public String getLastPaymentDate() {
         return lastPaymentDate;
     }
+    public String getMembershipStatus() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate lastPaymentDate = LocalDate.parse(getLastPaymentDate(), formatter);
+        LocalDate oneYearAgo = LocalDate.now().minusYears(1);
 
-    public String getMembership() {
-        return membership;
+        if (lastPaymentDate.isAfter(oneYearAgo)) {
+            return "Active";
+        } else {
+            return "Inactive";
+        }
     }
-
     public void setMembership(String membership) {
         this.membership = membership;
     }
-
     public String getFirstName() {
         return getFullName().split(" ")[0];
     }
-
     public String getSurName() {
         String[] nameParts = getFullName().split(" ", 2);
         return nameParts.length > 1 ? nameParts[1] : "";
@@ -46,11 +52,18 @@ public class Person {
     @Override
     public String toString() {
         return "Person:\n" +
-                "Name: " + getSurName() +
-                ", " + getFirstName() +
+                getFullName() +
                 ". P nr: " + pNr + ".\n" +
                 "Last payment: " + lastPaymentDate +
-                ", Membership: " + membership + '\n'
-                ;
+                ", Membership: " + membership + '\n';
+    }
+
+    public String toStringList() {
+        return String.format("%-25s %-20s %-20s %-15s",
+                "Name: " + getSurName() + ", " + getFirstName() +".",
+                "P nr: " + pNr + " ",
+                "Last payment: " + lastPaymentDate,
+                "Membership: " + getMembershipStatus()
+        );
     }
 }

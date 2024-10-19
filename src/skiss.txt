@@ -3,13 +3,24 @@
 // xkolla om filen innehåller info
 // xsplitta info pnr, namn, datum
 // xlägg in i hashmap
-// x(tilldela ID?) nej, personnumret är ID.
+// xpersonnumret är ID.
 
 // xjämför datum med dagens datum
 // xom datum är mindre än ett år sedan, skriv ut att kunden är en nuvarande medlem
 // xom datum är mer än ett år sedan, skriv ut att kunden är en före detta kund
 // xom personen inte finns i filen, skriv ut att personen är obehörig
 // xskriv till fil (nån toString?)
+
+// xgör en metod som skriver in alla nuvarande och föredetta kunder i en fil.
+// xgör en metod som rensar listan på kunder.
+// xskriv till fil/log när kunden checkar in
+
+// börja med optionpane som frågar om man vill:
+-kolla upp en person, medlemsstatus
+-visa alla kunder
+-rensa listan
+-träna / checka in på gymet.
+
 
 // allt testdrivet
 

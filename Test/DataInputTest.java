@@ -59,11 +59,10 @@ public class DataInputTest {
         } else {
             System.out.println("Medlemskapet har gått ut.");
         }
-
     }
 
     @Test
-    public void writeToFileTest() throws IOException {
+    public void writeMemberToFileTest() throws IOException {
         testMembers.put(testMember.getpNr(), testMember);
 
         // Skriver

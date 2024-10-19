@@ -37,8 +37,5 @@ public class DataInput {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
-//        for (Person person : gymMembersDataList.values()) {
-//            System.out.println(person.toString());
-//        }
     }
 }
