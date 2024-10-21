@@ -61,9 +61,9 @@ public class Person {
     }
 
     public String toStringList() {
-        return String.format("%-25s %-20s %-20s %-15s",
-                "Name: " + getSurName() + ", " + getFirstName() +".",
-                "pnr: " + pNr + " ",
+        return String.format("%-30s %-15s %-20s %-15s",
+                "Name: " + getFullName() + ",",
+                "pnr: " + pNr + ", ",
                 "Last payment: " + lastPaymentDate,
                 "Membership: " + getMembershipStatus());
     }

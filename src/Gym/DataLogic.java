@@ -41,7 +41,7 @@ public class DataLogic {
     public Person findMemberByNameOrId(String checkInput) {
         MemberNameChecker memberNameChecker = new MemberNameChecker();
 
-        List<Person> matchingPersons = memberNameChecker.findMembersByName(gymMembersDataList, checkInput);
+        List<Person> matchingPersons = MemberNameChecker.findMembersByName(gymMembersDataList, checkInput);
         if (matchingPersons.isEmpty()) {
             return null;
         }

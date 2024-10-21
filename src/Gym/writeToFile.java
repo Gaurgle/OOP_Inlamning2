@@ -1,13 +1,16 @@
 package Gym;
 
+import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class writeToFile implements IFileWriter {
 
+        // Används ej
         public static void writeToGymMembers(Person person) {
             String gymMembersFilePath = "src/Gym/Files/GymMembersData.txt";
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(gymMembersFilePath, true))) {
@@ -16,7 +19,6 @@ public class writeToFile implements IFileWriter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
         public void writeAllMembersToFile(Collection<Person> members) {
             String gymMembersFilePath = "src/Gym/Files/GymMembersData.txt";
