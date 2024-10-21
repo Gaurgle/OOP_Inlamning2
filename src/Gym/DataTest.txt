@@ -1,1 +1,0 @@
-Person{pNr=9003135555, name='Andreas Roos', lastPaymentDate='2021-12-12'}

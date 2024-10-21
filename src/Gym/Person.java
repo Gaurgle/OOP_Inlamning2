@@ -26,6 +26,9 @@ public class Person {
     public String getLastPaymentDate() {
         return lastPaymentDate;
     }
+    public void setLastPaymentDate(String date) {
+        this.lastPaymentDate = date;
+    }
     public String getMembershipStatus() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate lastPaymentDate = LocalDate.parse(getLastPaymentDate(), formatter);
@@ -43,17 +46,16 @@ public class Person {
     public String getFirstName() {
         return getFullName().split(" ")[0];
     }
-    public String getSurName() {
-        String[] nameParts = getFullName().split(" ", 2);
-        return nameParts.length > 1 ? nameParts[1] : "";
 
+    public String getSurName() {
+        String[] nameParts = getFullName().split(" ", 3);
+        return nameParts.length > 1 ? nameParts[1] : "";
     }
 
-    @Override
     public String toString() {
         return "Person:\n" +
                 getFullName() +
-                ". P nr: " + pNr + ".\n" +
+                ". pnr: " + pNr + ".\n" +
                 "Last payment: " + lastPaymentDate +
                 ", Membership: " + membership + '\n';
     }
@@ -61,9 +63,8 @@ public class Person {
     public String toStringList() {
         return String.format("%-25s %-20s %-20s %-15s",
                 "Name: " + getSurName() + ", " + getFirstName() +".",
-                "P nr: " + pNr + " ",
+                "pnr: " + pNr + " ",
                 "Last payment: " + lastPaymentDate,
-                "Membership: " + getMembershipStatus()
-        );
+                "Membership: " + getMembershipStatus());
     }
 }

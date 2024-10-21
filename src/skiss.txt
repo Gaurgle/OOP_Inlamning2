@@ -16,16 +16,26 @@
 // xskriv till fil/log när kunden checkar in
 
 // börja med optionpane som frågar om man vill:
--kolla upp en person, medlemsstatus
--visa alla kunder
--rensa listan
--träna / checka in på gymet.
+-xKolla upp en person, medlemsstatus
+-xVisa alla kunder
+-xRensa listan
+-xTräna / checka in på gymet.
 
+-xOm medlemskap är inaktivt kan man inte checka in. Meddela att man måste förnya tjänsten.
+-Gör en animation vid inlogg?
 
 // allt testdrivet
+// kolla över testerna, dela upp i:
+    DataLogicTest
+    DataInputTest (hämta härifrån)
+    WriteToFileTest
+
+// xVad händer om man har samma namn?
 
 
+// xGör metod som om man enbart söker på ett förnamn, finns det i listan ska man få som alternativ de fullständiga namn som matchar
 
-// /gör metod som om man enbart söker på ett förnamn, finns det i listan ska man få som alternativ de fullständiga namn som matchar
-
+    // gör en check här, för varje person i listan, om personer delar förnamn, så lägg
+    // skriver vi personen till DuplicateNames.txt
+    // sen kollar vi om personen finns i listan, gör den det går vi vidare till MemberNameChecker
 

@@ -1,11 +1,9 @@
 package Gym;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import static Gym.writeToFile.writeToGymMembers;
+import java.util.List;
 
 public class DataLogic {
 
@@ -17,91 +15,52 @@ public class DataLogic {
         this.fileWriter = new writeToFile();
     }
 
+    // tar input från användaren och kollar om personen är medlem eller inte
     public void checkMembership() {
         String checkInput = JOptionPane.showInputDialog("Enter name or social security ID nr: ");
         checkInput = checkInput.trim();
 
-        Person foundPerson = findMemberByNameOrId(checkInput);
+        // om ingen input avslutas programmet.
+        if (checkInput.isBlank() || checkInput.isEmpty()) {
+            System.out.println("No input, exiting program");
+            System.exit(0);
+        }
 
-        if (foundPerson == null) {
-            JOptionPane.showMessageDialog(null, checkInput + " does not exist in the system.");
+        Person foundPerson = findMemberByNameOrId(checkInput);
+        if (foundPerson == null && !checkInput.isBlank()) {
+            JOptionPane.showMessageDialog(null, "\"" + checkInput + "\"" + " does not exist in the system.");
             return;
         }
 
+        if (foundPerson != null) {
+            checkMembershipStatus(foundPerson);
+        }
+    }
+
+    // hittar personen i listan
+    public Person findMemberByNameOrId(String checkInput) {
+        MemberNameChecker memberNameChecker = new MemberNameChecker();
+
+        List<Person> matchingPersons = memberNameChecker.findMembersByName(gymMembersDataList, checkInput);
+        if (matchingPersons.isEmpty()) {
+            return null;
+        }
+        return memberNameChecker.askUserToSelectPerson(matchingPersons);
+    }
+
+    // kollar om medlemskapet är aktivt eller inaktivt
+    private void checkMembershipStatus(Person foundPerson) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate lastPaymentDate = LocalDate.parse(foundPerson.getLastPaymentDate(), formatter);
         LocalDate today = LocalDate.now();
         LocalDate oneYearAgo = today.minusYears(1);
 
-/*        for (Person person : gymMembersDataList.gymMembersDataList.values()) {
-            String[] nameParts = person.getFullName().split(" ", 2);
-            String firstName = nameParts[0];
-            String surName = nameParts.length > 1 ? nameParts[1] : "";
-
-            if (    person.getFullName().equalsIgnoreCase(checkInput)
-                    || firstName.equalsIgnoreCase(checkInput)
-                    || surName.equalsIgnoreCase(checkInput)){
-
-                foundPerson = person;
-                break;
-            }
-
-            try {
-                Long checkInputLong = Long.parseLong(checkInput);
-                if (person.getpNr().equals(checkInputLong)) {
-                    foundPerson = person;
-                    break;
-                }
-            } catch (NumberFormatException _) {
-
-            }
-        }
-        if (foundPerson == null) {
-            JOptionPane.showMessageDialog(null,checkInput + "s membership is invalid.");
-            return;
-        }*/
-
         if (!lastPaymentDate.isBefore(oneYearAgo) && !lastPaymentDate.isAfter(today)) {
             foundPerson.setMembership("Active");
-            System.out.println(foundPerson.toString()); //behövs
+            System.out.println(foundPerson.toString());
         } else {
             foundPerson.setMembership("Inactive");
             System.out.println(foundPerson.toString());
         }
-    }
-
-    public Person findMemberByNameOrId(String checkInput) {
-        for (Person person : gymMembersDataList.gymMembersDataList.values()) {
-            String[] nameParts = person.getFullName().split(" ", 2);
-            String firstName = nameParts[0];
-            String surName = nameParts.length > 1 ? nameParts[1] : "";
-
-            if (person.getFullName().equalsIgnoreCase(checkInput)
-                    || firstName.equalsIgnoreCase(checkInput)
-                    || surName.equalsIgnoreCase(checkInput)) {
-
-                person.setMembership("Active");
-                return person;
-            }
-
-            try {
-                Long checkInputLong = Long.parseLong(checkInput);
-                if (person.getpNr().equals(checkInputLong)) {
-                    return person;
-                }
-            } catch (NumberFormatException _) {
-            }
-        }
-        return null;
-
-/*        // hjälpmetod för att skriva till filen
-        public void writeToGymMembers(Person person) {
-            String gymMembersFilePath = "src/Gym/GymMembersData.txt";
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(gymMembersFilePath, true))) {
-            writer.write(person.toStringList());
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/ //hjälpmetod writeToGymMembers flyttad till writeToFile.java
     }
 }

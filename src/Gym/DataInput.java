@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class DataInput {
 
-    // relative path
-    protected File gymMembersData = new File("src/Gym/Data.txt");
+                   // variabelnamn för filvägen        // relative path
+    protected File gymMembersData = new File("src/Gym/Files/Data.txt");
     protected HashMap<Long, Person> gymMembersDataList = new HashMap<>();
 
-
+    // early return om filen inte hittas.
     public DataInput() throws FileNotFoundException {
         if (!gymMembersData.exists()) {
             throw new FileNotFoundException("Filen hittades ej.");
@@ -24,12 +24,12 @@ public class DataInput {
                     String pNrName = sc.nextLine();
                     String lastPaymentDate = sc.nextLine();
 
-                    // splitta och parse. lastPaymentDate behöver inte parsas eller splittas.
+                    // split och parse. lastPaymentDate behöver inte parsas eller splittas.
                     String[] parts = pNrName.split(",\\s*");
                     Long pNr = Long.parseLong(parts[0]);
                     String fullName = parts[1];
 
-                    // lägger in nytt personobjekt i persons-listan
+                    // lägger in nytt personobjekt i gymMembersList-map
                     gymMembersDataList.put(pNr, new Person(pNr, fullName, lastPaymentDate, ""));
                 }
             }
