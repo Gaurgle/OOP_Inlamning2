@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DataInputTest {
 
+    // variabler att använda för test
     private final String oldDate = "1900-01-01";
     private final String today = LocalDate.now().toString();
     private final HashMap<Long, Person> testMembers = new HashMap<>();
@@ -22,34 +23,47 @@ public class DataInputTest {
             "2021-12-12",
             "N/A");
 
+    // kollar att Data-fil existerar
     @Test
     public void testFileExist() {
-        File gymMembersData = new File("src/Gym/Data.txt");
+        File gymMembersData = new File("src/Gym/Files/Data.txt");
         assertTrue(gymMembersData.exists());
     }
 
+    // kollar att fil ej är tom
+    @Test
+    public void testFileDataIsEmpty() {
+        File gymMembersData = new File("src/Gym/Files/Data.txt");
+        assertTrue(gymMembersData.exists());
+    }
+
+    // kollar att testfil ej är tom
     @Test
     public void testFileIsNotEmpty() {
-        File gymMembersData = new File("src/Gym/Data.txt");
-        assertNotEquals(0, gymMembersData.length());
+        testMembers.put(testMember.getpNr(), testMember);
+        File gymMembersDataTest = new File("src/Gym/Files/DataTest.txt");
+        assertNotEquals(0, gymMembersDataTest.length());
     }
 
+
+    // kollar om fullständig information finns för medlem
     @Test
     public void testSplit() throws FileNotFoundException {
-        File gymMembersData = new File("src/Gym/Data.txt");
+        File gymMembersData = new File("src/Gym/Files/Data.txt");
         Scanner sc = new Scanner(gymMembersData);
 
-        // kollar om fullständig information finns för medlem
         assertTrue(sc.hasNextLine());
         assertTrue(sc.hasNextLine());
     }
 
+    // kollar datum (idag != oldDate)
     @Test
     public void testLastPaymentDate() {
         assertEquals(today, LocalDate.now().toString());
         assertNotEquals(today, oldDate);
     }
 
+    // kollar om medlemskap är aktivt eller ej
     @Test
     public void testCheckMembership() {
         String memberDate = testMember.getLastPaymentDate();
@@ -64,12 +78,13 @@ public class DataInputTest {
         }
     }
 
+    // testar skriva medlem till fil
     @Test
     public void testWriteMemberToFile() throws IOException {
         testMembers.put(testMember.getpNr(), testMember);
 
         // Skriver
-        String testFilePath = "src/Gym/DataTest.txt";
+        String testFilePath = "src/Gym/Files/DataTest.txt";
         BufferedWriter writer = Files.newBufferedWriter(Path.of(testFilePath));
         for (Person _ : testMembers.values()) {
             writer.write(testMember + "\n");

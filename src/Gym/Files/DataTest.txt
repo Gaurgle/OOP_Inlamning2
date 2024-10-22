@@ -1,4 +1,4 @@
 Person:
-Andreas Roos. P nr: 9003135555.
+Andreas Roos. pnr: 9003135555.
 Last payment: 2021-12-12, Membership: 
 

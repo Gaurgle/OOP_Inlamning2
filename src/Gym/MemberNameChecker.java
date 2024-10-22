@@ -1,7 +1,6 @@
 package Gym;
 
 import javax.swing.*;
-import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +9,15 @@ public class MemberNameChecker {
 
     // Metod för att hitta personer genom namn, och lista personer med samma namn
     public static List<Person> findMembersByName(DataInput gymMembersDataList, String checkInput) {
-        FileWriter fileWriter = null;
+//        FileWriter fileWriter = null;
         List<Person> matchingPersons = new ArrayList<>();
+
+        Long inputAsPnr = null;
+        try {
+            inputAsPnr = Long.parseLong(checkInput);
+        } catch (NumberFormatException _) {
+        }
+
         for (Person person : gymMembersDataList.gymMembersDataList.values()) {
             String[] nameParts = person.getFullName().split(" ", 2);
             String firstName = nameParts[0];
@@ -19,7 +25,8 @@ public class MemberNameChecker {
 
             if (person.getFullName().equalsIgnoreCase(checkInput)
                     || firstName.equalsIgnoreCase(checkInput)
-                    || surName.equalsIgnoreCase(checkInput)) {
+                    || surName.equalsIgnoreCase(checkInput)
+                    || (person.getpNr().equals(inputAsPnr))) {
                 matchingPersons.add(person);
             }
         }

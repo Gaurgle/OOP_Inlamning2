@@ -18,6 +18,12 @@ public class DataLogic {
     // tar input från användaren och kollar om personen är medlem eller inte
     public void checkMembership() {
         String checkInput = JOptionPane.showInputDialog("Enter name or social security ID nr: ");
+
+         if (checkInput == null) {
+            System.out.println("User canceled input, exiting program.");
+            System.exit(0);  // Exit program if no input
+        }
+
         checkInput = checkInput.trim();
 
         // om ingen input avslutas programmet.
