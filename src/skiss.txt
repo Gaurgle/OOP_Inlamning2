@@ -20,6 +20,7 @@
 -xVisa alla kunder
 -xRensa listan
 -xTräna / checka in på gymet.
+// xVad händer om man har samma namn?
 
 -xOm medlemskap är inaktivt kan man inte checka in. Meddela att man måste förnya tjänsten.
 -Gör en animation vid inlogg?
@@ -30,12 +31,6 @@
     DataInputTest (hämta härifrån)
     WriteToFileTest
 
-// xVad händer om man har samma namn?
 
 
-// xGör metod som om man enbart söker på ett förnamn, finns det i listan ska man få som alternativ de fullständiga namn som matchar
-
-    // gör en check här, för varje person i listan, om personer delar förnamn, så lägg
-    // skriver vi personen till DuplicateNames.txt
-    // sen kollar vi om personen finns i listan, gör den det går vi vidare till MemberNameChecker
 

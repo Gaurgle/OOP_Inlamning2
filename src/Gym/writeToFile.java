@@ -1,25 +1,13 @@
 package Gym;
 
-import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Comparator;
 
 public class writeToFile implements IFileWriter {
 
-        // Används ej
-        public static void writeToGymMembers(Person person) {
-            String gymMembersFilePath = "src/Gym/Files/GymMembersData.txt";
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(gymMembersFilePath, true))) {
-                writer.write(person.toStringList());
-                writer.newLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         public void writeAllMembersToFile(Collection<Person> members) {
             String gymMembersFilePath = "src/Gym/Files/GymMembersData.txt";
             int numMembers = members.size();
@@ -56,7 +44,9 @@ public class writeToFile implements IFileWriter {
             boolean activeMember = person.getMembershipStatus().equals("Active");
 
             if (!activeMember) {
-                System.out.println("Member " +person.getFullName() +" is not an active member.\nPlease renew membership to check in.");
+                System.out.println("Member " +person.getFullName() +
+                        " is not an active member.\n" +
+                        "Please renew membership to check in.");
                 return;
             }
 

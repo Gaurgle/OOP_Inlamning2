@@ -30,13 +30,6 @@ public class DataInputTest {
         assertTrue(gymMembersData.exists());
     }
 
-    // kollar att fil ej är tom
-    @Test
-    public void testFileDataIsEmpty() {
-        File gymMembersData = new File("src/Gym/Files/Data.txt");
-        assertTrue(gymMembersData.exists());
-    }
-
     // kollar att testfil ej är tom
     @Test
     public void testFileIsNotEmpty() {

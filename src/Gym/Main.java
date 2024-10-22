@@ -12,6 +12,7 @@ public class Main {
             DataInput dataInput = new DataInput();
             DataLogic dataLogic = new DataLogic(dataInput, new writeToFile());
 
+            // JOption meny
             String[] options = {
                     "Check member status",
                     "Show all members",
@@ -35,6 +36,7 @@ public class Main {
 
             writeToFile writeToFile = new writeToFile();
 
+            // enhanced switch kollar valt alternativ
             switch (selectedOption) {
                 case "Check member status" -> dataLogic.checkMembership();
                 case "Show all members" -> {
@@ -56,6 +58,7 @@ public class Main {
                 case null -> {}
                 default -> System.out.println("Invalid option");
             }
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
