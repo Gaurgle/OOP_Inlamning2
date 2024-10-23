@@ -47,7 +47,7 @@ public class MemberNameChecker {
 
         String selectedOption = (String) JOptionPane.showInputDialog(
                 null,
-                "Multiple persons with same name found. Select the correct person:",
+                "Multiple members share this name. Select the correct person:",
                 "Select person",
                 JOptionPane.QUESTION_MESSAGE,
                 null,

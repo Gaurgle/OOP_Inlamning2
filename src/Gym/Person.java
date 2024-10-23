@@ -22,15 +22,19 @@ public class Person {
     public Long getpNr() {
         return pNr;
     }
+
     public String getFullName() {
         return fullName;
     }
+
     public String getLastPaymentDate() {
         return lastPaymentDate;
     }
+
     public void setLastPaymentDate(String date) {
         this.lastPaymentDate = date;
     }
+
     public String getMembershipStatus() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate lastPaymentDate = LocalDate.parse(getLastPaymentDate(), formatter);
@@ -42,9 +46,11 @@ public class Person {
             return "Inactive";
         }
     }
+
     public void setMembership(String membership) {
         this.membership = membership;
     }
+
     public String getFirstName() {
         return getFullName().split(" ")[0];
     }
@@ -57,7 +63,7 @@ public class Person {
     public static int maxNameLength(Collection<Person> names) {
         int maxLength = 0;
         for (Person person : names) {
-            maxLength = Math.max(maxLength, person.getFullName().length() +6);
+            maxLength = Math.max(maxLength, person.getFullName().length() + 6);
         }
         return maxLength;
     }
@@ -70,11 +76,39 @@ public class Person {
                 ", Membership: " + membership + '\n';
     }
 
+    private String formatName(String name, int maxLengthPerLine) {
+        StringBuilder formattedName = new StringBuilder();
+        int start = 0;
+
+        // Break the name into substrings of maxLengthPerLine characters
+        while (start < name.length()) {
+            int end = Math.min(start + maxLengthPerLine, name.length());
+            formattedName.append(name, start, end);
+            if (end < name.length()) {
+                formattedName.append("\n");  // Add new line if more text is remaining
+            }
+            start = end;
+        }
+
+        return formattedName.toString();
+    }
+
     public String toStringList(int maxNameLength) {
-        return String.format("%-" +maxNameLength + "s %-15s. %-24s. %-15s",
-                "Name: " + getFullName(),
-                "pnr: " + pNr,
-                "Last payment: " + lastPaymentDate,
-                "Membership: " + getMembershipStatus());
+        if (getFullName().length() > 25) {
+            // Name exceeds 25 characters: print name on one line, and info on the next, aligned properly
+            return String.format("Name: %s\n%-" + maxNameLength + "s %-15s %-24s %-15s",
+                    getFullName() +":",
+                    "",  // This adds empty space for alignment
+                    "pnr: " + pNr,
+                    "Last payment: " + lastPaymentDate,
+                    "Membership: " + getMembershipStatus());
+        } else {
+            // Name is 25 characters or fewer: print everything on one line
+            return String.format("%-" + maxNameLength + "s %-15s %-24s %-15s",
+                    "Name: " + getFullName(),
+                    "pnr: " + pNr,
+                    "Last payment: " + lastPaymentDate,
+                    "Membership: " + getMembershipStatus());
+        }
     }
 }
