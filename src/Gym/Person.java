@@ -2,6 +2,8 @@ package Gym;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.List;
 
 public class Person {
 
@@ -52,6 +54,14 @@ public class Person {
         return nameParts.length > 1 ? nameParts[1] : "";
     }
 
+    public static int maxNameLength(Collection<Person> names) {
+        int maxLength = 0;
+        for (Person person : names) {
+            maxLength = Math.max(maxLength, person.getFullName().length() +6);
+        }
+        return maxLength;
+    }
+
     public String toString() {
         return "Person:\n" +
                 getFullName() +
@@ -60,10 +70,10 @@ public class Person {
                 ", Membership: " + membership + '\n';
     }
 
-    public String toStringList() {
-        return String.format("%-30s %-15s %-20s %-15s",
-                "Name: " + getFullName() + ",",
-                "pnr: " + pNr + ", ",
+    public String toStringList(int maxNameLength) {
+        return String.format("%-" +maxNameLength + "s %-15s. %-24s. %-15s",
+                "Name: " + getFullName(),
+                "pnr: " + pNr,
                 "Last payment: " + lastPaymentDate,
                 "Membership: " + getMembershipStatus());
     }

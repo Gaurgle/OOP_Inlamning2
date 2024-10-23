@@ -11,10 +11,11 @@ public class writeToFile implements IFileWriter {
         public void writeAllMembersToFile(Collection<Person> members) {
             String gymMembersFilePath = "src/Gym/Files/GymMembersData.txt";
             int numMembers = members.size();
+            int maxNameLength = Person.maxNameLength(members);
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(gymMembersFilePath, false))) {
 
                 for (Person person : members) {
-                    writer.write(person.toStringList());
+                    writer.write(person.toStringList(maxNameLength));
                     writer.newLine();
                 }
 

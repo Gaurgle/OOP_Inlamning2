@@ -9,7 +9,6 @@ public class MemberNameChecker {
 
     // Metod för att hitta personer genom namn, och lista personer med samma namn
     public static List<Person> findMembersByName(DataInput gymMembersDataList, String checkInput) {
-//        FileWriter fileWriter = null;
         List<Person> matchingPersons = new ArrayList<>();
 
         Long inputAsPnr = null;
@@ -44,7 +43,6 @@ public class MemberNameChecker {
         for (int i = 0; i < matchingPersons.size(); i++) {
             Person person = matchingPersons.get(i);
             options[i] = person.getFullName() + " (" + person.getpNr() + ")";
-            
         }
 
         String selectedOption = (String) JOptionPane.showInputDialog(
@@ -64,7 +62,6 @@ public class MemberNameChecker {
                 }
             }
         }
-
         return null;
     }
 }

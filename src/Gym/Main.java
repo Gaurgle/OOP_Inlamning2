@@ -29,7 +29,7 @@ public class Main {
                 if (clearFiles) {
                     writeToFile.clearAllMembers();
                 } else {
-                    System.out.println("Exiting program");
+                    System.out.println("Exiting program.");
                     System.exit(0);
                 }
             }
